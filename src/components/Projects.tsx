@@ -1,6 +1,6 @@
 
 import { Card } from "@/components/ui/card";
-import { Microscope, Database, Brain, Flask, FileCode, Layers } from "lucide-react";
+import { Microscope, Database, Brain, Beaker, FileCode, Layers } from "lucide-react";
 import { useState } from "react";
 
 const Projects = () => {
@@ -10,7 +10,7 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center mb-8">
-          <Flask className="text-bio-blue mr-3" size={28} />
+          <Beaker className="text-bio-blue mr-3" size={28} />
           <h2 className="text-3xl font-bold text-bio-navy">Projects</h2>
         </div>
         <div className="section-header-line"></div>
