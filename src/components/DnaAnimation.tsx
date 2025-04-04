@@ -14,7 +14,7 @@ const DnaAnimation = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Base nucleotide pairs
+    // Enhanced base nucleotide pairs with more vibrant colors
     const basePairs = [
       { base1: 'A', base2: 'T', color1: '#2563eb', color2: '#ff6347' },
       { base1: 'T', base2: 'A', color1: '#ff6347', color2: '#2563eb' },
@@ -22,7 +22,7 @@ const DnaAnimation = () => {
       { base1: 'C', base2: 'G', color1: '#fcd34d', color2: '#4ade80' },
     ];
 
-    const numberOfRungs = 20;
+    const numberOfRungs = 25;
     const rungs = Array.from({ length: numberOfRungs }).map((_, i) => ({
       index: i,
       pair: basePairs[Math.floor(Math.random() * basePairs.length)],
@@ -41,7 +41,7 @@ const DnaAnimation = () => {
       const helix1Points = [];
       const helix2Points = [];
 
-      // Draw DNA backbone
+      // Draw DNA backbone with enhanced visual style
       for (let i = 0; i < 200; i++) {
         const t = (i / 100) * Math.PI * 2 + frame;
         
@@ -56,11 +56,20 @@ const DnaAnimation = () => {
         helix2Points.push({ x: x2, y: y2, z: z2 });
       }
 
-      // Draw helixes
+      // Draw helixes with gradient effect
       ctx.lineWidth = 5;
       
+      // First helix with gradient
+      const gradient1 = ctx.createLinearGradient(
+        0, centerY - 200, 
+        0, centerY + 200
+      );
+      gradient1.addColorStop(0, '#2563eb');
+      gradient1.addColorStop(0.5, '#3b82f6');
+      gradient1.addColorStop(1, '#60a5fa');
+      
       ctx.beginPath();
-      ctx.strokeStyle = '#2563eb';
+      ctx.strokeStyle = gradient1;
       for (let i = 0; i < helix1Points.length - 1; i++) {
         const scale1 = depth / (depth + helix1Points[i].z);
         const scale2 = depth / (depth + helix1Points[i+1].z);
@@ -71,8 +80,17 @@ const DnaAnimation = () => {
       }
       ctx.stroke();
       
+      // Second helix with gradient
+      const gradient2 = ctx.createLinearGradient(
+        0, centerY - 200, 
+        0, centerY + 200
+      );
+      gradient2.addColorStop(0, '#2563eb');
+      gradient2.addColorStop(0.5, '#1d4ed8');
+      gradient2.addColorStop(1, '#1e40af');
+      
       ctx.beginPath();
-      ctx.strokeStyle = '#2563eb';
+      ctx.strokeStyle = gradient2;
       for (let i = 0; i < helix2Points.length - 1; i++) {
         const scale1 = depth / (depth + helix2Points[i].z);
         const scale2 = depth / (depth + helix2Points[i+1].z);
@@ -83,7 +101,7 @@ const DnaAnimation = () => {
       }
       ctx.stroke();
       
-      // Draw base pairs (rungs)
+      // Draw base pairs (rungs) with enhanced visuals
       for (const rung of rungs) {
         const t = (rung.index / rungs.length) * Math.PI * 4 + frame;
         
@@ -107,17 +125,35 @@ const DnaAnimation = () => {
         ctx.lineTo(x2 * scale2, y2 * scale2);
         ctx.stroke();
         
-        // Draw bases
+        // Draw bases with glow effect
         const baseRadius = 6;
+        
+        // Base 1 with glow
         ctx.fillStyle = rung.pair.color1;
         ctx.beginPath();
         ctx.arc(x1 * scale1, y1 * scale1, baseRadius, 0, Math.PI * 2);
         ctx.fill();
         
+        // Glow effect
+        ctx.shadowColor = rung.pair.color1;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(x1 * scale1, y1 * scale1, baseRadius * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Base 2 with glow
+        ctx.shadowColor = rung.pair.color2;
         ctx.fillStyle = rung.pair.color2;
         ctx.beginPath();
         ctx.arc(x2 * scale2, y2 * scale2, baseRadius, 0, Math.PI * 2);
         ctx.fill();
+        
+        // Glow effect
+        ctx.beginPath();
+        ctx.arc(x2 * scale2, y2 * scale2, baseRadius * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.shadowBlur = 0;
       }
       
       ctx.globalAlpha = 1;

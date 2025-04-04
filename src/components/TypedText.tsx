@@ -58,9 +58,9 @@ const TypedText = ({
   }, [texts, currentIndex, displayText, isTyping, isPaused, typingSpeed, deletingSpeed, delayBetween]);
   
   return (
-    <div className={`${className} typing-container`}>
+    <div className={`${className} typing-container flex items-center`}>
       <span className="inline-block">{displayText}</span>
-      <span className="typing-cursor">|</span>
+      <span className="typing-cursor bg-bio-blue mx-1 animate-[blink_1s_infinite] h-5 w-0.5 rounded"></span>
     </div>
   );
 };

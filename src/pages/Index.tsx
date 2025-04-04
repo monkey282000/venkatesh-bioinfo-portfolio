@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from 'react';
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -12,8 +13,19 @@ import Footer from "@/components/Footer";
 import CompTiles from "@/components/CompTiles";
 
 const Index = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Add a small delay for the loading animation
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <>
+    <div className={`transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <CompTiles />
       <Header />
       <Hero />
@@ -25,7 +37,7 @@ const Index = () => {
       <Projects />
       <Contact />
       <Footer />
-    </>
+    </div>
   );
 };
 
