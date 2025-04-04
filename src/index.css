@@ -1,92 +1,50 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;300;400;500;700&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 214 32% 91%;
+    --accent-foreground: 222 47% 10%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -98,4 +56,90 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+.section-header-line {
+  @apply h-1 w-10 bg-bio-blue rounded mt-1 mb-4;
+}
+
+.timeline-bullet::before {
+  content: "";
+  @apply absolute w-3 h-3 bg-bio-blue rounded-full -left-[6.5px] top-2 border-2 border-white;
+}
+
+.highlight-marker {
+  @apply bg-bio-lightblue px-2 py-0.5 rounded text-bio-navy font-medium;
+}
+
+.bio-card {
+  @apply bg-white shadow-md rounded-lg border border-gray-100 p-6 transition-all duration-300 hover:shadow-lg;
+}
+
+.typing-container {
+  display: inline-block;
+}
+
+.typing-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid;
+  width: 0;
+  animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+}
+
+.dna-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zm-24.596 0l-5.657 5.657 1.415 1.415L22.97 0h-4.255zm16.97 0l-7.07 7.07 1.414 1.415 8.485-8.485h-2.83zm-9.9 0l-8.485 8.485 1.414 1.414L25.456 0h-9.9zm32.285 0L58.042 7.9l-1.414 1.414L48.2 0h7.657zm-16.272 0l-8.485 8.485 1.414 1.414L41.97 0h-8.484zm-8.656 0L5.515 17.071l1.414 1.414L30 1.414 53.07 18.485l1.415-1.414L30.343 0h-8.656zM60 8.485L51.515 0H60v8.485zm-60 0L8.485 0H0v8.485z' fill='%232563eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.pill {
+  @apply px-3 py-1 text-xs font-medium rounded-full bg-bio-lightblue text-bio-navy whitespace-nowrap;
+}
+
+.tech-pill {
+  @apply px-3 py-1 text-xs font-medium rounded-full bg-bio-navy text-white whitespace-nowrap;
+}
+
+.publication-card {
+  @apply relative p-6 border border-gray-200 rounded-lg bg-white transition-all hover:-translate-y-1 hover:shadow-md;
+}
+
+.publication-card::before {
+  content: "";
+  @apply absolute top-0 left-0 w-1 h-full bg-bio-blue rounded-tl-lg rounded-bl-lg;
+}
+
+.timeline-item {
+  @apply ml-5 relative pb-10;
+}
+
+.timeline-item::before {
+  content: "";
+  @apply absolute left-[-20px] top-0 h-full w-0.5 bg-gray-200;
+}
+
+.timeline-item:last-child::before {
+  @apply h-6;
+}
+
+.skill-bar {
+  @apply h-2 bg-bio-lightblue rounded overflow-hidden relative;
+}
+
+.skill-level {
+  @apply h-full bg-bio-blue absolute top-0 left-0;
+}
+
+.experience-card {
+  @apply border-l-4 border-bio-blue pl-4 pb-8;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }

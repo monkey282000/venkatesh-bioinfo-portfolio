@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				bio: {
+					blue: '#2563eb',
+					navy: '#172554',
+					lightblue: '#dbeafe',
+					charcoal: '#1e293b'
 				}
 			},
 			borderRadius: {
@@ -84,11 +91,39 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				fadeIn: {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				typing: {
+					'0%': {
+						width: '0%',
+					},
+					'100%': {
+						width: '100%',
+					},
+				},
+				blink: {
+					'50%': {
+						borderColor: 'transparent',
+					},
+				},
+				wave: {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'50%': { transform: 'rotate(15deg)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fadeIn 0.5s ease-out forwards',
+				'typing': 'typing 3.5s steps(40, end), blink .75s step-end infinite',
+				'wave': 'wave 2.5s infinite',
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
 			}
 		}
 	},
