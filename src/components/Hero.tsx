@@ -1,13 +1,12 @@
-
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Dna, Database, Atom, Sparkles, BookOpen } from 'lucide-react';
 import TypedText from './TypedText';
-import DnaAnimation from './DnaAnimation';
+import ProteinAnimation from './ProteinAnimation';
 
 const Hero = () => {
   return (
-    <section id="top" className="min-h-screen relative flex items-center dna-bg overflow-hidden">
-      <DnaAnimation />
+    <section id="top" className="min-h-screen relative flex items-center protein-bg overflow-hidden">
+      <ProteinAnimation />
       <div className="absolute inset-0 bg-gradient-to-r from-white/95 to-white/80"></div>
       
       {/* Decorative elements */}
