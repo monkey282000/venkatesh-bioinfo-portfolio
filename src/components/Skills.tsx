@@ -1,7 +1,12 @@
 
+import { useState } from 'react';
 import { Card } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
+import { Dna, Code, Database, ChevronDown, ChevronUp } from 'lucide-react';
 
 const Skills = () => {
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
   // Programming skills with proficiency levels
   const programmingSkills = [
     { name: "Python (Pandas, PyTorch, NumPy, Scikit-learn)", level: 90 },
@@ -64,35 +69,78 @@ const Skills = () => {
     "CNVpytor"
   ];
 
+  const toggleSection = (section: string) => {
+    if (expandedSection === section) {
+      setExpandedSection(null);
+    } else {
+      setExpandedSection(section);
+    }
+  };
+
   return (
-    <section id="skills" className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-8">
-        <h2 className="text-3xl font-bold text-bio-navy mb-2">Skills & Expertise</h2>
+    <section id="skills" className="py-16 bg-gray-50 binary-bg relative">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="flex items-center mb-2">
+          <Code className="text-bio-blue mr-2" size={24} />
+          <h2 className="text-3xl font-bold text-bio-navy">Skills & Expertise</h2>
+        </div>
         <div className="section-header-line"></div>
         
         <div className="grid md:grid-cols-2 gap-8 mt-8">
           {/* Programming Skills */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="text-xl font-semibold mb-6 text-bio-navy">Programming</h3>
-            <div className="space-y-4">
+          <Card className="p-6 shadow-sm card-hover">
+            <div 
+              className="flex justify-between items-center cursor-pointer" 
+              onClick={() => toggleSection('programming')}
+            >
+              <h3 className="text-xl font-semibold text-bio-navy flex items-center">
+                <Code className="text-bio-blue mr-2" size={20} />
+                Programming
+              </h3>
+              {expandedSection === 'programming' ? (
+                <ChevronUp className="text-bio-blue" size={20} />
+              ) : (
+                <ChevronDown className="text-bio-blue" size={20} />
+              )}
+            </div>
+            
+            <div className={`space-y-4 ${expandedSection === 'programming' || expandedSection === null ? 'mt-6' : 'h-0 overflow-hidden mt-0'}`}>
               {programmingSkills.map((skill) => (
                 <div key={skill.name}>
                   <div className="flex justify-between mb-1">
                     <span className="text-gray-700 font-medium">{skill.name}</span>
                     <span className="text-sm text-gray-500">{skill.level}%</span>
                   </div>
-                  <div className="skill-bar">
-                    <div className="skill-level" style={{ width: `${skill.level}%` }}></div>
-                  </div>
+                  <Slider 
+                    value={[skill.level]} 
+                    max={100} 
+                    step={1} 
+                    className="skill-bar"
+                    disabled 
+                  />
                 </div>
               ))}
             </div>
           </Card>
 
           {/* Bioanalytical Techniques */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="text-xl font-semibold mb-6 text-bio-navy">Bioanalytical Techniques</h3>
-            <div className="flex flex-wrap gap-2">
+          <Card className="p-6 shadow-sm card-hover">
+            <div 
+              className="flex justify-between items-center cursor-pointer" 
+              onClick={() => toggleSection('biotech')}
+            >
+              <h3 className="text-xl font-semibold text-bio-navy flex items-center">
+                <Dna className="text-bio-blue mr-2" size={20} />
+                Bioanalytical Techniques
+              </h3>
+              {expandedSection === 'biotech' ? (
+                <ChevronUp className="text-bio-blue" size={20} />
+              ) : (
+                <ChevronDown className="text-bio-blue" size={20} />
+              )}
+            </div>
+            
+            <div className={`flex flex-wrap gap-2 ${expandedSection === 'biotech' || expandedSection === null ? 'mt-6' : 'h-0 overflow-hidden mt-0'}`}>
               {bioTechniques.map((technique) => (
                 <span key={technique} className="pill">
                   {technique}
@@ -102,9 +150,23 @@ const Skills = () => {
           </Card>
           
           {/* Software & Tools */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="text-xl font-semibold mb-6 text-bio-navy">Software & Tools</h3>
-            <div className="flex flex-wrap gap-2">
+          <Card className="p-6 shadow-sm card-hover">
+            <div 
+              className="flex justify-between items-center cursor-pointer" 
+              onClick={() => toggleSection('software')}
+            >
+              <h3 className="text-xl font-semibold text-bio-navy flex items-center">
+                <Database className="text-bio-blue mr-2" size={20} />
+                Software & Tools
+              </h3>
+              {expandedSection === 'software' ? (
+                <ChevronUp className="text-bio-blue" size={20} />
+              ) : (
+                <ChevronDown className="text-bio-blue" size={20} />
+              )}
+            </div>
+            
+            <div className={`flex flex-wrap gap-2 ${expandedSection === 'software' || expandedSection === null ? 'mt-6' : 'h-0 overflow-hidden mt-0'}`}>
               {softwareTools.map((tool) => (
                 <span key={tool} className="pill">
                   {tool}
@@ -114,9 +176,23 @@ const Skills = () => {
           </Card>
           
           {/* NGS Tools */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="text-xl font-semibold mb-6 text-bio-navy">NGS Tools for Downstream Analysis</h3>
-            <div className="flex flex-wrap gap-2">
+          <Card className="p-6 shadow-sm card-hover">
+            <div 
+              className="flex justify-between items-center cursor-pointer" 
+              onClick={() => toggleSection('ngs')}
+            >
+              <h3 className="text-xl font-semibold text-bio-navy flex items-center">
+                <Dna className="text-bio-blue mr-2" size={20} />
+                NGS Tools for Downstream Analysis
+              </h3>
+              {expandedSection === 'ngs' ? (
+                <ChevronUp className="text-bio-blue" size={20} />
+              ) : (
+                <ChevronDown className="text-bio-blue" size={20} />
+              )}
+            </div>
+            
+            <div className={`flex flex-wrap gap-2 ${expandedSection === 'ngs' || expandedSection === null ? 'mt-6' : 'h-0 overflow-hidden mt-0'}`}>
               {ngsTools.map((tool) => (
                 <span key={tool} className="pill">
                   {tool}

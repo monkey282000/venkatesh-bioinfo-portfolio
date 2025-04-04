@@ -9,10 +9,12 @@ import Publications from "@/components/Publications";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import CompTiles from "@/components/CompTiles";
 
 const Index = () => {
   return (
     <>
+      <CompTiles />
       <Header />
       <Hero />
       <About />
