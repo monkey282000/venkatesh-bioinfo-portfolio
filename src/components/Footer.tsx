@@ -1,5 +1,6 @@
 
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,9 +10,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <h3 className="font-bold text-xl">
+            <Link to="/" className="font-bold text-xl">
               Venkatesh<span className="text-bio-blue">.bio</span>
-            </h3>
+            </Link>
             <p className="text-gray-300 mt-2">Bioinformatics Professional</p>
           </div>
           
@@ -49,15 +50,15 @@ const Footer = () => {
             &copy; {currentYear} Venkatesh Rajendran. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#about" className="text-gray-400 hover:text-white text-sm">
+            <Link to="/about" className="text-gray-400 hover:text-white text-sm">
               About
-            </a>
-            <a href="#skills" className="text-gray-400 hover:text-white text-sm">
+            </Link>
+            <Link to="/skills" className="text-gray-400 hover:text-white text-sm">
               Skills
-            </a>
-            <a href="#contact" className="text-gray-400 hover:text-white text-sm">
+            </Link>
+            <Link to="/contact" className="text-gray-400 hover:text-white text-sm">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,10 +2,12 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,39 +22,46 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Close mobile menu when changing routes
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const menuItems = [
-    { title: 'About', href: '#about' },
-    { title: 'Experience', href: '#experience' },
-    { title: 'Skills', href: '#skills' },
-    { title: 'Education', href: '#education' },
-    { title: 'Publications', href: '#publications' },
-    { title: 'Projects', href: '#projects' },
-    { title: 'Contact', href: '#contact' },
+    { title: 'About', href: '/about' },
+    { title: 'Experience', href: '/experience' },
+    { title: 'Skills', href: '/skills' },
+    { title: 'Education', href: '/education' },
+    { title: 'Publications', href: '/publications' },
+    { title: 'Projects', href: '/projects' },
+    { title: 'Contact', href: '/contact' },
   ];
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto flex justify-between items-center px-4 lg:px-8">
         <div>
-          <a href="#top" className="font-bold text-xl md:text-2xl text-bio-navy">
+          <Link to="/" className="font-bold text-xl md:text-2xl text-bio-navy">
             Venkatesh<span className="text-bio-blue">.bio</span>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden lg:flex space-x-6">
           {menuItems.map((item) => (
-            <a
+            <Link
               key={item.title}
-              href={item.href}
-              className="text-gray-700 hover:text-bio-blue font-medium transition-colors"
+              to={item.href}
+              className={`font-medium transition-colors ${
+                location.pathname === item.href ? 'text-bio-blue' : 'text-gray-700 hover:text-bio-blue'
+              }`}
             >
               {item.title}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -103,14 +112,15 @@ const Header = () => {
           <div className="container mx-auto px-4 py-3">
             <nav className="flex flex-col space-y-3">
               {menuItems.map((item) => (
-                <a
+                <Link
                   key={item.title}
-                  href={item.href}
-                  className="text-gray-700 hover:text-bio-blue font-medium py-2 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
+                  to={item.href}
+                  className={`font-medium py-2 transition-colors ${
+                    location.pathname === item.href ? 'text-bio-blue' : 'text-gray-700 hover:text-bio-blue'
+                  }`}
                 >
                   {item.title}
-                </a>
+                </Link>
               ))}
               <div className="flex space-x-4 pt-2 border-t border-gray-100 mt-2">
                 <a 
