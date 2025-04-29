@@ -1,10 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
+import { Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const Contact = () => {
@@ -51,17 +50,7 @@ const Contact = () => {
               I'm always open to discussing new projects, research collaborations, or opportunities in bioinformatics. Feel free to reach out!
             </p>
             
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="bg-bio-lightblue p-3 rounded-full mr-4">
-                  <Phone className="text-bio-blue" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-medium text-bio-navy">Phone</h4>
-                  <p className="text-gray-600">+91 9344349741</p>
-                </div>
-              </div>
-              
+            <div className="space-y-6">              
               <div className="flex items-start">
                 <div className="bg-bio-lightblue p-3 rounded-full mr-4">
                   <Mail className="text-bio-blue" size={20} />
