@@ -1,8 +1,7 @@
-
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Beaker, Flask, Microscope, BookOpen, Clock, AlertCircle } from "lucide-react";
+import { Beaker, FlaskConical, Microscope, BookOpen, Clock, AlertCircle } from "lucide-react";
 import ProteinAnimation from "./ProteinAnimation";
 import { useState, useEffect } from "react";
 
@@ -113,7 +112,7 @@ const Research = () => {
                 <div>
                   <div className="flex items-center">
                     <div className="bg-green-100 p-2 rounded-full mr-3">
-                      <Flask className="text-green-600" size={24} />
+                      <FlaskConical className="text-green-600" size={24} />
                     </div>
                     <h3 className="text-xl font-semibold text-bio-navy">CRISPR-Cas9 Based Gene Editing for Rare Diseases</h3>
                   </div>
