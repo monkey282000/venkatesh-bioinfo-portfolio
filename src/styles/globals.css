@@ -1,0 +1,9 @@
+
+/* Add this to your global CSS file if it doesn't exist already */
+.tech-pill {
+  @apply bg-gray-100 px-3 py-1 text-xs rounded-full text-gray-700;
+}
+
+.section-header-line {
+  @apply w-24 h-1 bg-bio-blue mt-1;
+}
