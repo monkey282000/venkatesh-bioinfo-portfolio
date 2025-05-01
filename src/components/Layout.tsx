@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import CompTiles from "./CompTiles";
 import { useEffect, useState } from "react";
-import ScientificBackground from "./ScientificBackground";
+import GeometricBackground from "./GeometricBackground";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,7 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className={`flex flex-col min-h-screen transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-      <ScientificBackground />
+      <GeometricBackground />
       <CompTiles />
       <Header />
       <main className="flex-grow pt-20">
