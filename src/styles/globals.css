@@ -7,3 +7,33 @@
 .section-header-line {
   @apply w-24 h-1 bg-bio-blue mt-1;
 }
+
+/* Scientific background enhancement styles */
+.achievement-glow {
+  @apply relative;
+}
+
+.achievement-glow::after {
+  content: '';
+  @apply absolute inset-0 rounded-lg bg-gradient-to-br from-bio-blue/20 to-transparent opacity-70 blur-sm -z-10;
+}
+
+.molecule-bg {
+  @apply relative overflow-hidden;
+}
+
+.molecule-bg::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-b from-transparent to-white/80 z-10;
+}
+
+.research-card {
+  @apply bg-white/80 backdrop-blur-sm border border-gray-100 rounded-lg p-6 transition-all 
+         hover:shadow-md hover:border-bio-blue/20 relative overflow-hidden;
+}
+
+.research-card::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-bio-blue to-bio-lightblue rounded-t-lg;
+}
+
