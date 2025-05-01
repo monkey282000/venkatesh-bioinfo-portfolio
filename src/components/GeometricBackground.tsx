@@ -1,8 +1,9 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const GeometricBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +20,16 @@ const GeometricBackground = () => {
     
     window.addEventListener('resize', updateCanvasSize);
     updateCanvasSize();
+
+    // Track mouse position
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     // Configuration
     const colors = [
@@ -61,6 +72,9 @@ const GeometricBackground = () => {
       
       // Draw shapes
       shapes.forEach(shape => {
+        // Apply interactive effects based on mouse position
+        applyInteractivity(shape, mousePosition, canvas);
+        
         if (shape.type === 'triangle') {
           drawTriangle(ctx, shape);
         } else if (shape.type === 'circle') {
@@ -82,9 +96,10 @@ const GeometricBackground = () => {
 
     return () => {
       window.removeEventListener('resize', updateCanvasSize);
+      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [mousePosition]);
 
   return (
     <canvas 
@@ -320,6 +335,54 @@ function updateShape(shape: Shape, canvas: HTMLCanvasElement) {
   }
   if (shape.y < 0 || shape.y > canvas.height) {
     shape.direction.y *= -1;
+  }
+}
+
+// New function to handle mouse interactivity
+function applyInteractivity(shape: Shape, mousePosition: { x: number, y: number }, canvas: HTMLCanvasElement) {
+  // Calculate distance from shape to mouse
+  const dx = shape.x - mousePosition.x;
+  const dy = shape.y - mousePosition.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  
+  // Define interaction radius
+  const interactionRadius = 150;
+  
+  if (distance < interactionRadius) {
+    // Calculate effect strength based on distance (closer = stronger)
+    const strength = 1 - (distance / interactionRadius);
+    
+    // Increase opacity when mouse is near
+    shape.opacity = Math.min(0.8, shape.opacity + (strength * 0.3));
+    
+    // Increase rotation speed when mouse is near
+    shape.rotationSpeed += strength * 0.01 * (Math.random() > 0.5 ? 1 : -1);
+    
+    // Shapes move away from or toward cursor based on their type
+    if (shape.type === 'circle' || shape.type === 'hexagon') {
+      // Push away from cursor
+      shape.direction.x += (dx / distance) * strength * 0.2;
+      shape.direction.y += (dy / distance) * strength * 0.2;
+    } else {
+      // Pull toward cursor
+      shape.direction.x -= (dx / distance) * strength * 0.1;
+      shape.direction.y -= (dy / distance) * strength * 0.1;
+    }
+    
+    // Normalize direction vector to maintain consistent speed
+    const dirMagnitude = Math.sqrt(shape.direction.x * shape.direction.x + shape.direction.y * shape.direction.y);
+    if (dirMagnitude > 0) {
+      shape.direction.x = shape.direction.x / dirMagnitude;
+      shape.direction.y = shape.direction.y / dirMagnitude;
+    }
+    
+    // Slightly adjust the color
+    if (Math.random() > 0.95) {
+      shape.color = getRandomColor();
+    }
+  } else {
+    // Gradually return to original opacity
+    shape.opacity = Math.max(0.1, shape.opacity - 0.01);
   }
 }
 

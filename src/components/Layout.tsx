@@ -12,6 +12,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [interactionCount, setInteractionCount] = useState(0);
 
   useEffect(() => {
     // Add a small delay for the loading animation
@@ -19,7 +20,22 @@ const Layout = ({ children }: LayoutProps) => {
       setIsLoaded(true);
     }, 300);
     
-    return () => clearTimeout(timer);
+    // Track user interactions with the page
+    const handleInteraction = () => {
+      setInteractionCount(prev => prev + 1);
+    };
+    
+    // Add event listeners for various interactions
+    window.addEventListener('mousemove', handleInteraction);
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('scroll', handleInteraction);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('mousemove', handleInteraction);
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('scroll', handleInteraction);
+    };
   }, []);
 
   return (
